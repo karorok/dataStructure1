@@ -1,0 +1,75 @@
+5 5
+#####  
+S   # 
+#   #
+#   E
+#####
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+while(maze[row][col] !='E'){
+			maze[row][col] = '+';
+			saveUnvisitedNeighbors(stack,row,col+1);
+			saveUnvisitedNeighbors(stack,row+1,col);
+			if(col != 0)
+				saveUnvisitedNeighbors(stack,row,col-1);
+			if(row != 0)
+				saveUnvisitedNeighbors(stack,row-1,col);
+			if(stack.isEmpty())
+				return false;
+			else{
+				currLoc = stack.pop();
+				row = currLoc.getRow();
+				col = currLoc.getCol();
+			}
+		}
+		return true;
+
+
+
+
+
+
+
+
+
+
+public static void findExit(int row, int col){
+		LinkedStack<Location> stack = new LinkedStack<Location>();
+		saveUnvisitedNeighbors(stack,row,col);
+		System.out.println("Number of Path: "+path);
+	}
+	
+	public static void saveUnvisitedNeighbors(LinkedStack<Location> s,int row, int col){
+		Location loc = new Location(row,col);
+		if(maze[row][col] !='#' && maze[row][col] !='+'){
+			s.push(loc);
+			if(maze[row][col] != 'E'){			
+				saveUnvisitedNeighbors(s,row,col+1);
+				saveUnvisitedNeighbors(s,row+1,col);
+				if(col != 0)
+					saveUnvisitedNeighbors(s,row,col-1);
+				if(row != 0)
+					saveUnvisitedNeighbors(s,row-1,col);
+			}
+			else{
+				s.printDistance(maze);
+				path++;
+	
+			}
+		}¡¤
+	}
